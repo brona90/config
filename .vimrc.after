@@ -1,0 +1,145 @@
+syntax enable
+colorscheme solarized
+
+let maplocalleader = "\\"
+
+autocmd FileType ruby,eruby set filetype=ruby.erb.chef
+
+nmap rd :redraw!<CR>
+
+"Trinity key bindings
+" Open and close all the three plugins on the same time
+nmap <F7>  :TrinityToggleAll<CR>
+
+" Open and close the Source Explorer separately
+nmap <F8>  :TrinityToggleSourceExplorer<CR>
+
+" Open and close the Taglist separately
+nmap <F9> :TrinityToggleTagList<CR>
+
+" Open and close the NERD Tree separately
+nmap <F10> :TrinityToggleNERDTree<CR>
+
+nmap <F1> :!ctags -R --exclude=.git --exclude=logs --exclude=doc .<CR>
+" au BufRead,BufNewFile *.rb setlocal tags+=~/.vim/after/tags/ruby_and_gems
+
+" " Trigger configuration. Do not use <tab> if you use
+" https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<c-j>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsEditSplit="vertical"
+
+let g:EclimCompletionMethod = 'omnifunc'
+
+let g:NERDTreeWinPos = "right"
+noremap ;; :
+nmap nt :NERDTreeToggle<CR>
+nmap tl :TlistToggle<CR>
+nmap se :SrcExplToggle<CR>
+
+" let Tlist_Use_Split_Window = 1
+com TT NERDTreeToggle | TlistToggle
+nmap tt :TT<CR>
+nmap <F6> :TT<CR>
+
+let g:lightline = {
+      \ 'colorscheme': 'solarized',
+      \ 'mode_map': { 'c': 'NORMAL' },
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ]
+      \ },
+      \ 'component_function': {
+      \   'modified': 'MyModified',
+      \   'readonly': 'MyReadonly',
+      \   'fugitive': 'MyFugitive',
+      \   'filename': 'MyFilename',
+      \   'fileformat': 'MyFileformat',
+      \   'filetype': 'MyFiletype',
+      \   'fileencoding': 'MyFileencoding',
+      \   'mode': 'MyMode',
+      \ },
+      \ 'separator': { 'left': '⮀', 'right': '⮂' },
+      \ 'subseparator': { 'left': '⮁', 'right': '⮃' }
+      \ }
+
+function! MyModified()
+  return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
+endfunction
+
+function! MyReadonly()
+  return &ft !~? 'help\|vimfiler\|gundo' && &readonly ? '⭤' : ''
+endfunction
+
+function! MyFilename()
+  return ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
+        \ (&ft == 'vimfiler' ? vimfiler#get_status_string() : 
+        \  &ft == 'unite' ? unite#get_status_string() : 
+        \  &ft == 'vimshell' ? vimshell#get_status_string() :
+        \ '' != expand('%:t') ? expand('%:t') : '[No Name]') .
+        \ ('' != MyModified() ? ' ' . MyModified() : '')
+endfunction
+
+function! MyFugitive()
+  if &ft !~? 'vimfiler\|gundo' && exists("*fugitive#head")
+    let _ = fugitive#head()
+    return strlen(_) ? '⭠ '._ : ''
+  endif
+  return ''
+endfunction
+
+function! MyFileformat()
+  return winwidth(0) > 70 ? &fileformat : ''
+endfunction
+
+function! MyFiletype()
+  return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
+endfunction
+
+function! MyFileencoding()
+  return winwidth(0) > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
+endfunction
+
+function! MyMode()
+  return winwidth(0) > 60 ? lightline#mode() : ''
+endfunction
+
+set t_Co=256
+
+let g:solarized_termcolors=256
+
+let NERDTreeShowHidden=1
+
+set tags=tags
+
+if exists('+colorcolumn')
+  set colorcolumn=80
+else
+  au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
+endif
+
+" highlight OverLength ctermbg=darkred ctermfg=white guibg=#FFD9D9
+" match OverLength /\%>80v.\+/
+
+if !exists("g:pathogen_disabled")
+  let g:pathogen_disabled = []
+endif
+
+set laststatus=2 "always show the statusline"
+
+" use Rubocop syntax checker for Ruby
+ if executable('rubocop')
+   let g:syntastic_ruby_checkers = ['mri', 'rubocop']
+ endif
+
+let g:ycm_register_as_syntastic_checker = 0
+let g:syntastic_aggregate_errors = 1
+
+" augroup syntastic
+"   autocmd!
+"   autocmd BufWritePost * SyntasticCheck
+" augroup END
+
+let g:netrw_liststyle=3
+
+map <leader>k :Texplore<cr>
