@@ -1,0 +1,96 @@
+entity CrossFitter {
+	program Program required
+    coreSkills CoreSkills required
+    geneticSex GeneticSex required
+    genderID String
+    photo Blob
+}
+
+enum GeneticSex {
+	MALE,
+    FEMALE
+}
+
+entity Program {
+	programType ProgramType required
+    blocks Blocks required
+    startDate LocalDate required
+    isActive Boolean required
+}
+
+enum ProgramType {
+	COMPETITOR, 
+    DOMINATE, 
+    APPLIED_POWER
+}
+
+entity CoreSkills {
+	double CoreSkill,
+    ringmu CoreSkill,
+    barmu CoreSkill,
+    ctbpull CoreSkill,
+    toestb CoreSkill,
+    kspu CoreSkill,
+    hswalks CoreSkill,
+    pistols CoreSkill
+}
+
+entity CoreSkill {
+	coreSkillType CoreSkillType required
+    ability Int required
+    perscription String
+}
+
+enum CoreSkillType {
+	DOUBLE, 
+    RINGMU, 
+    BARMU, 
+    CTBPULL, 
+    TOESTB, 
+    HSPU, 
+    HSWALKS,
+    PISTOLS
+}
+
+entity Block {
+    isInProgram Boolean required, 
+    name String    
+}
+
+entity Blocks {
+	rfdssc Block,
+    skillsa Block,
+    skillsb Block,
+    ogs Block,
+    purecap Block,
+    pwu Block,
+    swl Block,
+    acl Block,
+    metcov Block
+}
+
+relationship OneToOne {
+	CrossFitter{program} to Program
+    CrossFitter{coreSkills} to CoreSkills
+    Program{blocks} to Blocks
+}
+
+relationship ManyToOne {
+	Blocks{rfdssc} to Block,
+   	Blocks{skillsa} to Block,
+	Blocks{skillsb} to Block,
+	Blocks{ogs} to Block,
+	Blocks{purecap} to Block,
+	Blocks{pwu} to Block,
+	Blocks{swl} to Block,
+	Blocks{acl} to Block,
+   	Blocks{metcov} to Block,
+    CoreSkills{ringmu} to CoreSkill,
+    CoreSkills{barmu} to CoreSkill,
+    CoreSkills{ctbpull} to CoreSkill,
+    CoreSkills{toestb} to CoreSkill,
+    CoreSkills{kspu} to CoreSkill,
+    CoreSkills{hswalks} to CoreSkill,
+    CoreSkills{pistols} to CoreSkill,
+    CoreSkills{double} to CoreSkill    
+}
