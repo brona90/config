@@ -17,5 +17,5 @@ endif
 
 set laststatus=2 "always show the statusline"
 
-let g:session_autosave = 'yes'
+let g:session_autosave = 'no'
 
