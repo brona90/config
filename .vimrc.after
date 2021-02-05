@@ -19,3 +19,4 @@ set laststatus=2 "always show the statusline"
 
 let g:session_autosave = 'no'
 
+let g:snipMate = { 'snippet_version' : 1 }
