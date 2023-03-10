@@ -79,7 +79,7 @@ ENABLE_CORRECTION="true"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   git 
-  zsh-z 
+  z 
   asdf
   zsh-alias-finder
   fast-syntax-highlighting
