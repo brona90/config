@@ -4,3 +4,6 @@
 [submodule ".config/emacs"]
 	path = .config/emacs
 	url = https://github.com/doomemacs/doomemacs
+[submodule ".vim"]
+	path = .vim
+	url = http://github.com/SpaceVim/SpaceVim
