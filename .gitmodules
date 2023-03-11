@@ -1,9 +1,6 @@
 [submodule ".tmux"]
 	path = .tmux
 	url = https://github.com/gpakosz/.tmux.git
-[submodule ".yadr"]
-	path = .yadr
-	url = https://github.com/skwp/dotfiles.git
 [submodule ".config/emacs"]
 	path = .config/emacs
 	url = https://github.com/doomemacs/doomemacs
