@@ -22,5 +22,3 @@
 [user]
 	email = brona90@gmail.com
 	name = Gregory Foster
-[credential]
-	helper = /mnt/c/Program\\ Files/Git/mingw64/libexec/git-core/git-credential-manager-core.exe
