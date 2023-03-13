@@ -30,6 +30,7 @@ COMPLETION_WAITING_DOTS="true"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   git 
+  vi-mode
   z 
   asdf
   zsh-alias-finder
@@ -55,3 +56,4 @@ bindkey '^[[B' history-substring-search-down
 
 bindkey "$terminfo[kcuu1]" history-substring-search-up
 bindkey "$terminfo[kcud1]" history-substring-search-down
+
