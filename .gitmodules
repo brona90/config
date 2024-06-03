@@ -6,4 +6,4 @@
 	url = https://github.com/doomemacs/doomemacs
 [submodule ".vim"]
 	path = .vim
-	url = http://github.com/SpaceVim/SpaceVim
+	url = https://spacevim.org/git/repos/SpaceVim/
